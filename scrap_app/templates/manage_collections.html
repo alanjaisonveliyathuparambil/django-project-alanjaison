@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Collections{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">Manage Scrap Collections</h2>
+
+    <table>
+        <tr>
+            <th>Collection ID</th>
+            <th>Request ID</th>
+            <th>Collector</th>
+            <th>Actual Weight</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>COL301</td>
+            <td>REQ102</td>
+            <td>Collector 1</td>
+            <td>20 Kg</td>
+            <td><span class="status completed">Completed</span></td>
+        </tr>
+
+        <tr>
+            <td>COL302</td>
+            <td>REQ103</td>
+            <td>Collector 2</td>
+            <td>Pending</td>
+            <td><span class="status pending">Assigned</span></td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

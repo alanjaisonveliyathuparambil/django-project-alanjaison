@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Collection{% endblock %}
+
+{% block content %}
+
+<div class="form-box">
+    <h2 class="section-title">Update Collection</h2>
+
+    <form>
+        <label>Request ID</label>
+        <input type="text" placeholder="Enter request ID">
+
+        <label>Actual Weight Collected</label>
+        <input type="number" placeholder="Enter weight in kg">
+
+        <label>Collection Status</label>
+        <select>
+            <option>Picked Up</option>
+            <option>Not Available</option>
+            <option>Completed</option>
+        </select>
+
+        <label>Remarks</label>
+        <textarea rows="4" placeholder="Enter remarks"></textarea>
+
+        <button type="button" class="btn" onclick="showAlert('Collection updated successfully')">
+            Update Collection
+        </button>
+    </form>
+</div>
+
+{% endblock %}

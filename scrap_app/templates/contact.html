@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact | SwiftScrap{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <p class="section-label">CONTACT US</p>
+    <h2 class="section-title">Book or Enquire About Scrap Pickup</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>📍 Location</h3>
+            <p>Thrissur, Kerala, India</p>
+        </div>
+
+        
+
+        <div class="card">
+            <h3>📧 Email</h3>
+            <p>info@swiftscrap.com</p>
+        </div>
+    </div>
+
+    <div class="form-box">
+        <form>
+            <label>Name</label>
+            <input type="text" placeholder="Enter your name">
+
+            <label>Mobile Number</label>
+            <input type="text" placeholder="Enter mobile number">
+
+            <label>Email</label>
+            <input type="email" placeholder="Enter email">
+
+            <label>Description</label>
+            <textarea rows="5" placeholder="Tell us about your scrap pickup requirement"></textarea>
+
+            <button type="button" class="btn" onclick="showAlert('Enquiry submitted successfully')">
+                Submit Enquiry
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

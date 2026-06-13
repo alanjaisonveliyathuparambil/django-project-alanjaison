@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}My Transactions{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">My Transactions</h2>
+
+    <table>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Scrap Type</th>
+            <th>Weight</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+        </tr>
+
+        <tr>
+            <td>TXN501</td>
+            <td>Iron</td>
+            <td>20 Kg</td>
+            <td>₹700</td>
+            <td><span class="status completed">Paid</span></td>
+        </tr>
+
+        <tr>
+            <td>TXN502</td>
+            <td>Plastic</td>
+            <td>10 Kg</td>
+            <td>₹200</td>
+            <td><span class="status pending">Pending</span></td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,797 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SwiftScrap{% endblock %}</title>
+
+    <script>
+        if (sessionStorage.getItem("swiftScrapIntroPlayed") === "yes") {
+            document.documentElement.classList.add("intro-played");
+        }
+    </script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+        body{background:#f6f8f4;color:#1f2937;overflow-x:hidden}
+
+        .intro-played .intro-video{
+            display:none !important;
+        }
+
+        /* 10 SECOND CINEMATIC INTRO */
+        .intro-video{
+            position:fixed;
+            inset:0;
+            background:#020617;
+            z-index:999999;
+            overflow:hidden;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:white;
+        }
+
+        .skip-intro{
+            position:absolute;
+            top:25px;
+            right:25px;
+            z-index:20;
+            background:rgba(255,255,255,0.15);
+            color:white;
+            border:1px solid rgba(255,255,255,0.4);
+            padding:10px 20px;
+            border-radius:30px;
+            cursor:pointer;
+        }
+
+        .skip-intro:hover{background:#16a34a}
+
+        .movie-bg{
+            position:absolute;
+            inset:0;
+            background:
+            linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.75)),
+            url("https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1800&q=90");
+            background-size:cover;
+            background-position:center;
+            transform:scale(1.2);
+            animation:bgZoom 10s linear forwards;
+        }
+
+        .cinema-top,.cinema-bottom{
+            position:absolute;
+            left:0;
+            width:100%;
+            height:13vh;
+            background:#000;
+            z-index:10;
+        }
+
+        .cinema-top{top:0}
+        .cinema-bottom{bottom:0}
+
+        .green-glow{
+            position:absolute;
+            width:55vw;
+            height:55vw;
+            border-radius:50%;
+            background:radial-gradient(circle,rgba(22,163,74,.45),transparent 65%);
+            filter:blur(30px);
+            animation:glowMove 10s ease-in-out forwards;
+        }
+
+        .scrap-icons{
+            position:absolute;
+            inset:0;
+            z-index:3;
+        }
+
+        .scrap-icons span{
+            position:absolute;
+            font-size:clamp(30px,5vw,70px);
+            opacity:0;
+            animation:floatScrap 10s ease-in-out forwards;
+        }
+
+        .scrap-icons span:nth-child(1){left:10%;top:65%;animation-delay:1s}
+        .scrap-icons span:nth-child(2){left:22%;top:35%;animation-delay:2s}
+        .scrap-icons span:nth-child(3){left:70%;top:40%;animation-delay:3s}
+        .scrap-icons span:nth-child(4){left:82%;top:65%;animation-delay:4s}
+        .scrap-icons span:nth-child(5){left:48%;top:72%;animation-delay:5s}
+
+        .truck{
+            position:absolute;
+            z-index:5;
+            font-size:clamp(90px,13vw,190px);
+            bottom:18%;
+            left:-30%;
+            animation:truckDrive 5s ease-in-out forwards;
+            animation-delay:2s;
+            filter:drop-shadow(0 0 25px rgba(126,224,129,.8));
+        }
+
+        .intro-text{
+            position:relative;
+            z-index:11;
+            text-align:center;
+            width:90%;
+        }
+
+        .line-one{
+            font-size:clamp(16px,2vw,28px);
+            letter-spacing:5px;
+            color:#86efac;
+            opacity:0;
+            animation:fadeInOut 3s ease forwards;
+            animation-delay:.5s;
+        }
+
+        .line-two{
+            font-size:clamp(28px,6vw,80px);
+            font-weight:900;
+            margin-top:18px;
+            opacity:0;
+            animation:fadeInOut 3s ease forwards;
+            animation-delay:2.8s;
+        }
+
+        .line-three{
+            font-size:clamp(22px,4vw,55px);
+            color:#86efac;
+            margin-top:15px;
+            opacity:0;
+            animation:fadeInOut 2.5s ease forwards;
+            animation-delay:5.4s;
+        }
+
+        .final-logo{
+            opacity:0;
+            transform:scale(.5);
+            animation:logoReveal 2.2s ease forwards;
+            animation-delay:7.5s;
+        }
+
+        .final-logo h1{
+            font-size:clamp(48px,9vw,130px);
+            font-weight:900;
+            text-shadow:0 0 40px rgba(126,224,129,.9);
+        }
+
+        .final-logo span{color:#86efac}
+
+        .final-logo p{
+            margin-top:10px;
+            font-size:clamp(15px,2.5vw,30px);
+        }
+
+        @keyframes bgZoom{
+            from{transform:scale(1.25)}
+            to{transform:scale(1)}
+        }
+
+        @keyframes glowMove{
+            0%{transform:translate(-40vw,-20vh)}
+            50%{transform:translate(20vw,10vh)}
+            100%{transform:translate(0,0)}
+        }
+
+        @keyframes floatScrap{
+            0%{opacity:0;transform:translateY(80px) rotate(0deg)}
+            40%{opacity:.9}
+            100%{opacity:0;transform:translateY(-120px) rotate(360deg)}
+        }
+
+        @keyframes truckDrive{
+            0%{left:-35%;opacity:0}
+            20%{opacity:1}
+            80%{left:42%;opacity:1}
+            100%{left:42%;opacity:0}
+        }
+
+        @keyframes fadeInOut{
+            0%{opacity:0;transform:translateY(25px)}
+            25%{opacity:1;transform:translateY(0)}
+            75%{opacity:1}
+            100%{opacity:0;transform:translateY(-25px)}
+        }
+
+        @keyframes logoReveal{
+            0%{opacity:0;transform:scale(.5)}
+            60%{opacity:1;transform:scale(1.12)}
+            100%{opacity:1;transform:scale(1)}
+        }
+
+        /* WEBSITE DESIGN */
+        .topbar{
+            background:#07251d;
+            color:white;
+            padding:10px 6%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            font-size:14px;
+            flex-wrap:wrap;
+            gap:10px;
+        }
+
+        .topbar span{margin-right:18px}
+
+        .main-nav{
+            background:white;
+            padding:16px 6%;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            box-shadow:0 4px 20px rgba(0,0,0,.08);
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo{
+            display:flex;
+            align-items:center;
+            gap:12px;
+        }
+
+        .logo img{
+            width:58px;
+            height:58px;
+            object-fit:cover;
+            border-radius:12px;
+            border:2px solid #16a34a;
+        }
+
+        .logo h2{
+            color:#07251d;
+            font-size:30px;
+        }
+
+        .logo span{color:#16a34a}
+
+        .nav-links a{
+            text-decoration:none;
+            color:#07251d;
+            margin-left:18px;
+            font-weight:600;
+        }
+
+        .nav-links a:hover{color:#16a34a}
+
+        .nav-btn{
+            background:#16a34a;
+            color:white!important;
+            padding:10px 18px;
+            border-radius:25px;
+        }
+
+        .hero{
+            min-height:86vh;
+            background:
+            linear-gradient(rgba(0,0,0,.60),rgba(0,0,0,.60)),
+            url("https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1600&q=80");
+            background-size:cover;
+            background-position:center;
+            display:flex;
+            align-items:center;
+            padding:70px 6%;
+            color:white;
+        }
+
+        .hero-content{max-width:760px}
+
+        .hero-small{
+            color:#8cf28f;
+            font-weight:bold;
+            letter-spacing:3px;
+            margin-bottom:15px;
+        }
+
+        .hero h1{
+            font-size:clamp(40px,6vw,72px);
+            line-height:1.1;
+            margin-bottom:22px;
+        }
+
+        .hero p{
+            font-size:18px;
+            line-height:1.8;
+            margin-bottom:28px;
+        }
+
+        .btn{
+            background:#16a34a;
+            color:white;
+            padding:13px 24px;
+            border-radius:30px;
+            text-decoration:none;
+            display:inline-block;
+            border:none;
+            cursor:pointer;
+            font-weight:bold;
+        }
+
+        .btn:hover{background:#0f7a36}
+
+        .btn-outline{
+            background:transparent;
+            border:2px solid white;
+            margin-left:12px;
+        }
+
+        .container{
+            width:88%;
+            margin:50px auto;
+        }
+
+        .section-label{
+            color:#16a34a;
+            text-align:center;
+            font-weight:bold;
+            letter-spacing:2px;
+            margin-bottom:8px;
+        }
+
+        .section-title{
+            text-align:center;
+            color:#07251d;
+            font-size:clamp(28px,4vw,42px);
+            margin-bottom:35px;
+        }
+
+        .cards{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+            gap:25px;
+        }
+
+        .card{
+            background:white;
+            padding:28px;
+            border-radius:16px;
+            box-shadow:0 8px 24px rgba(0,0,0,.08);
+            border-bottom:4px solid #16a34a;
+        }
+
+        .card h3{
+            color:#07251d;
+            margin-bottom:12px;
+        }
+
+        .card p{line-height:1.7}
+
+        .stats{
+            background:#07251d;
+            color:white;
+            padding:45px 6%;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+            gap:20px;
+            text-align:center;
+        }
+
+        .stat h2{
+            font-size:38px;
+            color:#8cf28f;
+        }
+
+        .form-box{
+            max-width:580px;
+            margin:45px auto;
+            background:white;
+            padding:32px;
+            border-radius:16px;
+            box-shadow:0 8px 24px rgba(0,0,0,.1);
+        }
+
+        label{
+            font-weight:bold;
+            color:#07251d;
+        }
+
+        input,select,textarea{
+            width:100%;
+            padding:13px;
+            margin:9px 0 18px;
+            border:1px solid #cbd5e1;
+            border-radius:8px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            box-shadow:0 8px 24px rgba(0,0,0,.08);
+            border-radius:12px;
+            overflow:hidden;
+        }
+
+        th,td{
+            padding:15px;
+            border:1px solid #e5e7eb;
+            text-align:center;
+        }
+
+        th{
+            background:#07251d;
+            color:white;
+        }
+
+        .status{
+            padding:7px 13px;
+            border-radius:20px;
+            color:white;
+            font-size:13px;
+        }
+
+        .pending{background:orange}
+        .approved{background:#2563eb}
+        .completed{background:#16a34a}
+
+        .footer{
+            background:#061b15;
+            color:white;
+            padding:35px 6%;
+            text-align:center;
+            margin-top:50px;
+        }
+
+        .footer h2 span{color:#8cf28f}
+
+        /* POPUP */
+        .popup-overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.65);
+            z-index:99999;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            padding:20px;
+        }
+
+        .popup-box{
+            background:white;
+            width:min(95%,430px);
+            border-radius:18px;
+            padding:28px;
+            position:relative;
+            box-shadow:0 20px 60px rgba(0,0,0,.35);
+            animation:popupZoom .4s ease;
+        }
+
+        @keyframes popupZoom{
+            from{transform:scale(.7);opacity:0}
+            to{transform:scale(1);opacity:1}
+        }
+
+        .close-popup{
+            position:absolute;
+            right:18px;
+            top:14px;
+            font-size:25px;
+            cursor:pointer;
+            color:#07251d;
+        }
+
+        .popup-tabs{
+            display:flex;
+            gap:10px;
+            margin-bottom:18px;
+        }
+
+        .popup-tabs button{
+            flex:1;
+            padding:11px;
+            border:none;
+            cursor:pointer;
+            border-radius:8px;
+            font-weight:bold;
+        }
+
+        .popup-tabs .active{
+            background:#16a34a;
+            color:white;
+        }
+
+        .popup-form{display:none}
+        .popup-form.active{display:block}
+
+        .dont-show{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-top:10px;
+            font-size:14px;
+        }
+
+        .dont-show input{
+            width:auto;
+            margin:0;
+        }
+
+        .help-floating-btn{
+            position:fixed;
+            right:25px;
+            bottom:25px;
+            width:78px;
+            height:78px;
+            background:white;
+            color:#07251d;
+            border:3px solid #16a34a;
+            border-radius:50%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            text-decoration:none;
+            font-weight:bold;
+            box-shadow:0 8px 25px rgba(0,0,0,0.25);
+            z-index:9999999;
+            transition:0.3s;
+        }
+
+        .help-floating-btn span{
+            font-size:26px;
+            line-height:22px;
+        }
+
+        .help-floating-btn small{
+            font-size:13px;
+            margin-top:4px;
+        }
+
+        .help-floating-btn:hover{
+            background:#16a34a;
+            color:white;
+            transform:scale(1.08);
+        }
+
+        @media(max-width:900px){
+            .topbar{
+                justify-content:center;
+                text-align:center;
+            }
+
+            .main-nav{
+                flex-direction:column;
+                gap:15px;
+            }
+
+            .nav-links{text-align:center}
+
+            .nav-links a{
+                display:inline-block;
+                margin:8px;
+            }
+
+            .hero{
+                text-align:center;
+                justify-content:center;
+                padding:55px 25px;
+            }
+
+            .btn-outline{
+                margin-left:0;
+                margin-top:12px;
+            }
+
+            .help-floating-btn{
+                width:68px;
+                height:68px;
+                right:18px;
+                bottom:18px;
+            }
+
+            .help-floating-btn span{
+                font-size:23px;
+            }
+
+            .help-floating-btn small{
+                font-size:12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="intro-video" id="introVideo">
+        <audio id="introMusic" preload="auto">
+            <source src="intro-music.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="truckSound" preload="auto">
+            <source src="truck.mp3" type="audio/mpeg">
+        </audio>
+        <button class="skip-intro" onclick="skipIntro()">Skip Intro</button>
+
+        <div class="movie-bg"></div>
+        <div class="green-glow"></div>
+        <div class="cinema-top"></div>
+        <div class="cinema-bottom"></div>
+
+        <div class="scrap-icons">
+            <span>📰</span>
+            <span>🧴</span>
+            <span>📦</span>
+            <span>🔩</span>
+            <span>♻️</span>
+        </div>
+
+        <div class="truck">🚛</div>
+
+        <div class="intro-text">
+            <div class="line-one">EVERY SCRAP HAS VALUE</div>
+            <div class="line-two">SMART PICKUP STARTS HERE</div>
+            <div class="line-three">RECYCLE • EARN • PROTECT NATURE</div>
+
+            <div class="final-logo">
+                <h1>Swift<span>Scrap</span></h1>
+                <p>Smart Scrap Pickup Management System</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="topbar">
+        <div>
+            <span>📍 Thrissur, Kerala</span>
+            <span>📧 info@swiftscrap.com</span>
+        </div>
+        <div>
+            <span>Mon - Sat: 9 AM - 6 PM</span>
+        </div>
+    </div>
+
+    <div class="main-nav">
+        <div class="logo">
+            <img src="https://www.shutterstock.com/image-vector/illustration-vector-graphic-junk-removal-260nw-2019090038.jpg" alt="SwiftScrap Logo">
+            <h2>Swift<span>Scrap</span></h2>
+        </div>
+
+        <div class="nav-links">
+            <a href="{% url 'home' %}">Home</a>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'scrap_prices' %}">Scrap Prices</a>
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'user_dashboard' %}">User</a>
+            <a href="{% url 'collector_dashboard' %}">Collector</a>
+            <a href="{% url 'admin_dashboard' %}">Admin</a>
+            <a class="nav-btn" href="{% url 'request_pickup' %}">Request Pickup</a>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+    <div class="footer">
+        <h2>Swift<span>Scrap</span></h2>
+        <p>Smart Scrap Pickup Management System</p>
+        <br>
+        <p>&copy; 2026 SwiftScrap. All Rights Reserved.</p>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-box">
+            <span class="close-popup" onclick="closePopup()">×</span>
+
+            <h2 style="text-align:center;color:#07251d;margin-bottom:18px;">
+                Join SwiftScrap
+            </h2>
+
+            <div class="popup-tabs">
+                <button id="loginTab" class="active" onclick="showPopupForm('login')">Login</button>
+                <button id="registerTab" onclick="showPopupForm('register')">Register</button>
+            </div>
+
+            <div id="popupLogin" class="popup-form active">
+                <label>Email</label>
+                <input type="email" placeholder="Enter email">
+
+                <label>Password</label>
+                <input type="password" placeholder="Enter password">
+
+                <button class="btn" style="width:100%;" onclick="showAlert('Login submitted')">
+                    Login
+                </button>
+            </div>
+
+            <div id="popupRegister" class="popup-form">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter full name">
+
+                <label>Email</label>
+                <input type="email" placeholder="Enter email">
+
+                <button class="btn" style="width:100%;" onclick="showAlert('Registration submitted')">
+                    Register
+                </button>
+            </div>
+
+            <label class="dont-show">
+                <input type="checkbox" id="dontShowAgain">
+                Don't show again
+            </label>
+        </div>
+    </div>
+
+    <a href="{% url 'help' %}" class="help-floating-btn">
+        <span>?</span>
+        <small>Help</small>
+    </a>
+
+    <script>
+        const introVideo = document.getElementById("introVideo");
+        const music = document.getElementById("introMusic");
+        const truck = document.getElementById("truckSound");
+
+        window.addEventListener("load", function(){
+            if(sessionStorage.getItem("swiftScrapIntroPlayed") === "yes"){
+                introVideo.style.display = "none";
+            }else{
+                sessionStorage.setItem("swiftScrapIntroPlayed", "yes");
+
+                setTimeout(function(){
+                    introVideo.style.display = "none";
+                }, 10000);
+            }
+        });
+
+        function skipIntro(){
+            sessionStorage.setItem("swiftScrapIntroPlayed", "yes");
+            introVideo.style.display = "none";
+        }
+
+        function showAlert(message){
+            alert(message);
+        }
+
+        function showPopup(){
+            if(localStorage.getItem("swiftScrapNoPopup") === "yes"){
+                return;
+            }
+
+            if(introVideo.style.display !== "none"){
+                setTimeout(showPopup, 3000);
+                return;
+            }
+
+            document.getElementById("popupOverlay").style.display = "flex";
+        }
+
+        function closePopup(){
+            if(document.getElementById("dontShowAgain").checked){
+                localStorage.setItem("swiftScrapNoPopup", "yes");
+            }
+
+            document.getElementById("popupOverlay").style.display = "none";
+
+            if(localStorage.getItem("swiftScrapNoPopup") !== "yes"){
+                setTimeout(showPopup, 10000);
+            }
+        }
+
+        function showPopupForm(type){
+            document.getElementById("popupLogin").classList.remove("active");
+            document.getElementById("popupRegister").classList.remove("active");
+            document.getElementById("loginTab").classList.remove("active");
+            document.getElementById("registerTab").classList.remove("active");
+
+            if(type === "login"){
+                document.getElementById("popupLogin").classList.add("active");
+                document.getElementById("loginTab").classList.add("active");
+            }else{
+                document.getElementById("popupRegister").classList.add("active");
+                document.getElementById("registerTab").classList.add("active");
+            }
+        }
+
+        setTimeout(showPopup, 20000);
+    </script>
+
+</body>
+</html>

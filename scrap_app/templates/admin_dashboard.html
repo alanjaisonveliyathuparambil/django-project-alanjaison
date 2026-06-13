@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">Admin Dashboard</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Users</h3>
+            <p>120 Registered Users</p>
+        </div>
+
+        <div class="card">
+            <h3>Pickup Requests</h3>
+            <p>45 Total Requests</p>
+        </div>
+
+        <div class="card">
+            <h3>Completed Collections</h3>
+            <p>30 Collections Completed</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Transactions</h3>
+            <p>₹58,400 Paid</p>
+        </div>
+    </div>
+
+    <br><br>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Manage Scrap</h3>
+            <a href="{% url 'manage_scrap' %}" class="btn">Open</a>
+        </div>
+
+        <div class="card">
+            <h3>Manage Requests</h3>
+            <a href="{% url 'manage_requests' %}" class="btn">Open</a>
+        </div>
+
+        <div class="card">
+            <h3>Manage Collections</h3>
+            <a href="{% url 'manage_collections' %}" class="btn">Open</a>
+        </div>
+
+        <div class="card">
+            <h3>Reports</h3>
+            <a href="{% url 'reports' %}" class="btn">Open</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

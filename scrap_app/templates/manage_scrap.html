@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Scrap{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">Manage Scrap Materials</h2>
+
+    <div class="form-box">
+        <form>
+            <label>Scrap Material Name</label>
+            <input type="text" placeholder="Enter scrap material">
+
+            <label>Price Per Kg</label>
+            <input type="number" placeholder="Enter price">
+
+            <button type="button" class="btn" onclick="showAlert('Scrap material added successfully')">
+                Add Scrap
+            </button>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Material</th>
+            <th>Price/Kg</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>Newspaper</td>
+            <td>₹15</td>
+            <td>Active</td>
+        </tr>
+
+        <tr>
+            <td>Iron</td>
+            <td>₹35</td>
+            <td>Active</td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

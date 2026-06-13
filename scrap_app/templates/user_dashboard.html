@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}User Dashboard | SwiftScrap{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">User Dashboard</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Request Pickup</h3>
+            <p>Schedule a new scrap pickup from your location.</p>
+            <br>
+            <a href="{% url 'request_pickup' %}" class="btn">Request Now</a>
+        </div>
+
+        <div class="card">
+            <h3>My Requests</h3>
+            <p>View your submitted pickup requests.</p>
+            <br>
+            <a href="{% url 'my_requests' %}" class="btn">View Requests</a>
+        </div>
+
+        <div class="card">
+            <h3>Transactions</h3>
+            <p>View payment details for completed pickups.</p>
+            <br>
+            <a href="{% url 'my_transactions' %}" class="btn">View Payments</a>
+        </div>
+
+        <div class="card">
+            <h3>Notifications</h3>
+            <p>Check latest pickup and payment updates.</p>
+            <br>
+            <a href="{% url 'notifications' %}" class="btn">View Updates</a>
+        </div>
+    </div>
+
+    <br><br>
+
+    <h2 class="section-title">Recent Pickup Requests</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Scrap Material</th>
+            <th>Quantity</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+
+        {% for req in requests %}
+        <tr>
+            <td>{{ req.id }}</td>
+            <td>{{ req.scrap_material.name }}</td>
+            <td>{{ req.quantity }} Kg</td>
+            <td>{{ req.preferred_date }}</td>
+            <td>
+                <span class="status pending">{{ req.status }}</span>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No pickup requests found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

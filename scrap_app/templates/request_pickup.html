@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Pickup{% endblock %}
+
+{% block content %}
+
+<div class="form-box">
+    <h2 class="section-title">Request Scrap Pickup</h2>
+
+    <form>
+        <label>Scrap Type</label>
+        <select>
+            <option>Newspaper</option>
+            <option>Cardboard</option>
+            <option>Plastic</option>
+            <option>Iron</option>
+            <option>Steel</option>
+            <option>Aluminium</option>
+            <option>Copper</option>
+        </select>
+
+        <label>Approximate Quantity</label>
+        <input type="number" placeholder="Enter quantity in kg">
+
+        <label>Pickup Address</label>
+        <textarea rows="2" placeholder="Enter pickup address" style="resize: none;"></textarea>
+
+        <label>Preferred Pickup Date</label>
+        <input type="date">
+
+        <label>Additional Notes</label>
+        <textarea rows="3" placeholder="Any extra information"></textarea>
+
+        <button type="button" class="btn" onclick="showAlert('Pickup request submitted successfully')">
+            Submit Request
+        </button>
+    </form>
+</div>
+
+{% endblock %}

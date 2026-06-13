@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Requests{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">Manage Pickup Requests</h2>
+
+    <table>
+        <tr>
+            <th>Request ID</th>
+            <th>User</th>
+            <th>Scrap Type</th>
+            <th>Quantity</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>REQ101</td>
+            <td>Alan Jaison</td>
+            <td>Newspaper</td>
+            <td>12 Kg</td>
+            <td><span class="status pending">Pending</span></td>
+            <td>
+                <button class="btn">Approve</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td>REQ102</td>
+            <td>John</td>
+            <td>Iron</td>
+            <td>20 Kg</td>
+            <td><span class="status approved">Approved</span></td>
+            <td>
+                <button class="btn">Assign Collector</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

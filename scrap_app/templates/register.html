@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+
+<div class="form-box">
+    <h2 class="section-title">User Registration</h2>
+
+    <form>
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter full name">
+
+        <label>Email</label>
+        <input type="email" placeholder="Enter email">
+
+        <label>Phone Number</label>
+        <input type="text" placeholder="Enter phone number">
+
+        <label>Address</label>
+        <textarea rows="4" placeholder="Enter address" style="resize: none;"></textarea>
+
+        <label>Password</label>
+        <input type="password" placeholder="Enter password">
+
+        <button type="button" class="btn" onclick="showAlert('Registration submitted successfully')">
+            Register
+        </button>
+    </form>
+</div>
+
+{% endblock %}

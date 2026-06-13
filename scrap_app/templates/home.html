@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Home | SwiftScrap{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-small">SMART • FAST • ECO-FRIENDLY</div>
+
+        <h1>Professional Scrap Pickup at Your Doorstep</h1>
+
+        <p>
+            SwiftScrap helps homes, shops, offices, and industries schedule scrap pickup,
+            track collection, verify weight, and receive transparent payments.
+        </p>
+
+        <a href="{% url 'request_pickup' %}" class="btn">Request Pickup</a>
+        <a href="{% url 'scrap_prices' %}" class="btn btn-outline">View Prices</a>
+    </div>
+</section>
+
+<div class="container">
+    <p class="section-label">OUR SERVICES</p>
+    <h2 class="section-title">Complete Scrap Management Solutions</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>🏠 Residential Scrap Pickup</h3>
+            <p>Book pickup for newspapers, plastic, metal, cardboard, and household recyclable materials.</p>
+        </div>
+
+        <div class="card">
+            <h3>🏢 Commercial Scrap Collection</h3>
+            <p>Reliable scrap collection service for shops, offices, institutions, and small businesses.</p>
+        </div>
+
+        <div class="card">
+            <h3>🏭 Industrial Scrap Handling</h3>
+            <p>Manage bulk scrap requests with proper tracking, collector assignment, and reporting.</p>
+        </div>
+
+        <div class="card">
+            <h3>♻️ Eco Recycling Support</h3>
+            <p>Promotes responsible recycling and helps reduce landfill waste through planned collection.</p>
+        </div>
+    </div>
+</div>
+
+<div class="stats">
+    <div class="stat">
+        <h2>120+</h2>
+        <p>Registered Users</p>
+    </div>
+
+    <div class="stat">
+        <h2>45+</h2>
+        <p>Pickup Requests</p>
+    </div>
+
+    <div class="stat">
+        <h2>1.2T</h2>
+        <p>Scrap Collected</p>
+    </div>
+
+    <div class="stat">
+        <h2>100%</h2>
+        <p>Transparent Pricing</p>
+    </div>
+</div>
+
+<div class="container">
+    <p class="section-label">HOW IT WORKS</p>
+    <h2 class="section-title">Simple 4-Step Process</h2>
+
+    <div class="cards">
+        <div class="card">
+            <h3>1. Register</h3>
+            <p>Create your SwiftScrap account and enter your basic details.</p>
+        </div>
+
+        <div class="card">
+            <h3>2. Request Pickup</h3>
+            <p>Select scrap type, quantity, pickup date, and location.</p>
+        </div>
+
+        <div class="card">
+            <h3>3. Collector Pickup</h3>
+            <p>Assigned collector visits your location and updates actual weight.</p>
+        </div>
+
+        <div class="card">
+            <h3>4. Payment</h3>
+            <p>Payment is calculated based on scrap type and verified quantity.</p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

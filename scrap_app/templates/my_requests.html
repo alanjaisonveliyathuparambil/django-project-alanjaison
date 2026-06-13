@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}My Requests | SwiftScrap{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">My Pickup Requests</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Scrap Material</th>
+            <th>Quantity</th>
+            <th>Pickup Address</th>
+            <th>Preferred Date</th>
+            <th>Status</th>
+        </tr>
+
+        {% for req in requests %}
+        <tr>
+            <td>{{ req.id }}</td>
+            <td>{{ req.scrap_material.name }}</td>
+            <td>{{ req.quantity }} Kg</td>
+            <td>{{ req.pickup_address }}</td>
+            <td>{{ req.preferred_date }}</td>
+            <td>
+                <span class="status pending">{{ req.status }}</span>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No requests submitted yet.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Assigned Pickups{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">Assigned Pickups</h2>
+
+    <table>
+        <tr>
+            <th>Request ID</th>
+            <th>User</th>
+            <th>Scrap Type</th>
+            <th>Location</th>
+            <th>Pickup Date</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>REQ201</td>
+            <td>Alan Jaison</td>
+            <td>Plastic</td>
+            <td>Thrissur</td>
+            <td>18-06-2026</td>
+            <td><span class="status approved">Assigned</span></td>
+        </tr>
+
+        <tr>
+            <td>REQ202</td>
+            <td>John</td>
+            <td>Cardboard</td>
+            <td>Irinjalakuda</td>
+            <td>19-06-2026</td>
+            <td><span class="status pending">Pending</span></td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Transactions{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h2 class="section-title">Manage Transactions</h2>
+
+    <table>
+        <tr>
+            <th>Transaction ID</th>
+            <th>User</th>
+            <th>Scrap Type</th>
+            <th>Weight</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+
+        <tr>
+            <td>TXN701</td>
+            <td>Alan Jaison</td>
+            <td>Iron</td>
+            <td>20 Kg</td>
+            <td>₹700</td>
+            <td><span class="status completed">Paid</span></td>
+        </tr>
+
+        <tr>
+            <td>TXN702</td>
+            <td>John</td>
+            <td>Plastic</td>
+            <td>10 Kg</td>
+            <td>₹200</td>
+            <td><span class="status pending">Pending</span></td>
+        </tr>
+    </table>
+</div>
+
+{% endblock %}

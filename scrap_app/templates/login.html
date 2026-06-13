@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Login | SwiftScrap{% endblock %}
+
+{% block content %}
+
+<div class="form-box">
+    <h2 class="section-title">Login</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter username">
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter password">
+
+        <button type="submit" class="btn" style="width:100%;">
+            Login
+        </button>
+    </form>
+</div>
+
+{% endblock %}
